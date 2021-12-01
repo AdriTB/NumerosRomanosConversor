@@ -15,34 +15,53 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        convertirARomanos()
 
         binding.btSeleccionar.setOnClickListener{
             it.scaleX *= -1
             if(it.scaleX > 0) {
                 //Decimales a Romanos
-                aRomanos = true
-                binding.etNumero.inputType = InputType.TYPE_CLASS_NUMBER
-                binding.etNumero.hint = "Escribe un número decimal"
+                convertirARomanos()
 
             }else if(it.scaleX < 0){
                 //Romanos a Decimales
-                aRomanos = false
-                binding.etNumero.inputType = InputType.TYPE_TEXT_FLAG_CAP_WORDS
-                binding.etNumero.hint = "Escribe un número romano"
+                convertirADecimales()
             }
         }
 
         binding.etNumero.addTextChangedListener {
             Log.d("Pruebas", "Texto cambiado a ${binding.etNumero.text}")
-            val numero:Int? = binding.etNumero.text.toString().toIntOrNull()
-            var resultado:String
-            if(aRomanos){
-                resultado = Calculo.convertirDecARom(numero!!)
-                binding.tvResultado.setText(resultado)
+            var resultado: String? = ""
+            if (aRomanos) {
+                val numero: Int? = binding.etNumero.text.toString().toIntOrNull()
+                if(numero != null){
+                    resultado = Calculo.convertirDecARom(numero)
+                    binding.tvResultado.setText(resultado)
+                }else{
+                    binding.tvResultado.setText("")
+                }
+            }else if(!aRomanos){
+                val numeroR: String = binding.etNumero.text.toString()
+                if(numeroR.isNotEmpty()){
+                    resultado = Calculo.convertirRomDec(numeroR)?.toString() ?: "No es un número válido"
+                    binding.tvResultado.setText(resultado)
+                }else{
+                    binding.tvResultado.setText("")
+                }
             }
-
         }
 
+    }
+
+    fun convertirARomanos(){
+        aRomanos = true
+        binding.etNumero.inputType = InputType.TYPE_CLASS_NUMBER
+        binding.etNumero.hint = "Escribe un número decimal"
+    }
+    fun convertirADecimales(){
+        aRomanos = false
+        binding.etNumero.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+        binding.etNumero.hint = "Escribe un número romano"
     }
 
 

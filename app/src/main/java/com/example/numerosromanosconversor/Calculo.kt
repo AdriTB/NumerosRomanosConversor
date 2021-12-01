@@ -1,5 +1,8 @@
 package com.example.numerosromanosconversor
 
+import android.util.Log
+import java.util.*
+
 class Calculo() {
     companion object{
         val numerosRomanos:Map<Char,Int> = mapOf(
@@ -14,15 +17,15 @@ class Calculo() {
 
         fun convertirDecARom(numDec:Int):String{
             if (numDec == 0){
-                return "0 no es representable en números romanos"
+                return "N"
             }
 
             if (numDec > 4999){
-                return "Debe ser inferior al 4999"
+                return "Escribe un número inferior a 5000"
             }
 
             if (numDec < 0){
-                return "No puede ser menor que 1"
+                return "No puede ser negativo"
             }
 
             var numero_romano = ""
@@ -65,6 +68,54 @@ class Calculo() {
 
             numero_romano = millaresRom + centenasRom + decenasRom + unidadesRom
             return numero_romano
+        }
+
+        fun convertirRomDec(numeroR: String): Int? {
+            val numeroR = numeroR.lowercase()
+            var numeroD = 0
+
+            if (numeroR.matches(Regex("(v).*\\1"))){
+                return null
+            }
+
+            if(numeroR == "n"){
+                return numeroD
+            }
+
+            var cont:Int = 0
+            while(cont < numeroR.length){
+                var valorActual:Int?
+                var valorSiguiente:Int? = 0
+
+                //Si alguna letra no forma parte de los números romanos devuelve nulo
+                if(numerosRomanos.containsKey(numeroR[cont])){
+                    valorActual = numerosRomanos.get(numeroR[cont])
+                }else{
+                    return null
+                }
+
+                //Si NO es el último valor de la cadena recoge el valor del siguiente número romano
+                if(cont < numeroR.length -1 && numerosRomanos.containsKey(numeroR[cont+1])){
+                    valorSiguiente = numerosRomanos.get(numeroR[cont + 1])
+                }
+
+                //Si el siguiente es mayor resta, si es menor suma el valor al número decimal
+                if(valorSiguiente!! > valorActual!!){
+                    if(valorSiguiente >= valorActual * 50){
+                        return null
+                    }
+                    numeroD += valorSiguiente - valorActual
+                    cont++
+                }
+                else{
+                    numeroD += valorActual
+                }
+                cont++
+            }
+
+
+            return numeroD
+
         }
 
     }
