@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     fun convertirARomanos(){
         aRomanos = true
         binding.etNumero.inputType = InputType.TYPE_CLASS_NUMBER
-        binding.etNumero.hint = "Escribe un número decimal"
+        binding.etNumero.hint = "Escribe un número natural"
     }
     fun convertirADecimales(){
         aRomanos = false

@@ -23,7 +23,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Decimales"
+        android:text="Arábigos"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/btSeleccionar"
