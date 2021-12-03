@@ -1,5 +1,6 @@
 package com.example.numerosromanosconversor
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         binding.etNumero.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
         binding.etNumero.hint = "Escribe un número romano"
     }
+
 
 
 

@@ -32,16 +32,16 @@
 
     <ImageButton
         android:id="@+id/btSeleccionar"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="0dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:scaleType="fitCenter"
         android:scaleX="1"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="@drawable/arrow" />
 
     <EditText
         android:id="@+id/etNumero"
@@ -52,7 +52,7 @@
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Escribe un número"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,5 +75,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNumero"
         tools:text="XXIVIII" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00FFFFFF"
+        android:foregroundTintMode="add"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/palette_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
