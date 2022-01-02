@@ -2,7 +2,6 @@ package com.example.numerosromanosconversor
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +9,7 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.core.widget.addTextChangedListener
 import com.example.numerosromanosconversor.databinding.ActivityMainBinding
 
@@ -26,12 +24,10 @@ class MainActivity : AppCompatActivity() {
         convertirARomanos()
 
         binding.btSeleccionar.setOnClickListener{
-            binding.etNumero.setText("")
             it.scaleX *= -1
             if(it.scaleX > 0) {
                 //Decimales a Romanos
                 convertirARomanos()
-
             }else if(it.scaleX < 0){
                 //Romanos a Decimales
                 convertirADecimales()
@@ -61,10 +57,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvResultado.setOnClickListener {
-            val clipboard:ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val data = ClipData.newPlainText("resultado", binding.tvResultado.text)
-            clipboard.setPrimaryClip(data)
-            Toast.makeText(this, "Resultado copiado", Toast.LENGTH_LONG).show()
+            if (binding.tvResultado.text.isNotEmpty()){
+                val clipboard:ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val data = ClipData.newPlainText("resultado", binding.tvResultado.text)
+                clipboard.setPrimaryClip(data)
+                Toast.makeText(this, "Resultado copiado", Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btTheme.setOnClickListener {
@@ -77,11 +75,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun convertirARomanos(){
+        binding.etNumero.setText("")
         aRomanos = true
         binding.etNumero.inputType = InputType.TYPE_CLASS_NUMBER
         binding.etNumero.hint = "Escribe un número natural"
     }
     fun convertirADecimales(){
+        binding.etNumero.setText("")
         aRomanos = false
         binding.etNumero.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
         binding.etNumero.hint = "Escribe un número romano"
