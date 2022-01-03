@@ -42,7 +42,7 @@
         android:foregroundTintMode="multiply"
         android:scaleType="fitCenter"
         android:scaleX="1"
-        android:tint="?android:attr/tint"
+        app:tint="?android:attr/tint"
         app:layout_constraintBottom_toTopOf="@+id/etNumero"
         app:layout_constraintEnd_toStartOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -96,7 +96,7 @@
         android:background="#00FFFFFF"
         android:foregroundTintMode="multiply"
         android:scaleType="fitCenter"
-        android:tint="?android:attr/tint"
+        app:tint="?android:attr/tint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/palette_dark" />

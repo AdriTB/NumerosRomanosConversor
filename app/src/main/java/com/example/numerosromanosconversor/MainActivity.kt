@@ -2,6 +2,8 @@ package com.example.numerosromanosconversor
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,7 +19,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
     var aRomanos = true
 
+    companion object{
+        const val KEY_TEMA = "Theme"
+        private const val TEMA_DEF = R.style.Theme_NumerosRomanosConversor
+        private const val TEMA_NIGHT = R.style.Theme_NumerosRomanosConversorNight
+        val temas = arrayOf(TEMA_DEF, TEMA_NIGHT)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val prefs = this.getSharedPreferences("com.example.NumerosRomanosConversor", Context.MODE_PRIVATE)
+        val temaConfigurado = prefs.getInt(KEY_TEMA, 0)
+
+        setTheme(temaConfigurado)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -66,11 +80,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btTheme.setOnClickListener {
-            if (this.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES){
-                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-            }else{
-                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-            }
+            val temaNuevo = temas[1]
+            prefs.edit().putInt(KEY_TEMA, temaNuevo).apply()
+            recreate()
         }
     }
 
