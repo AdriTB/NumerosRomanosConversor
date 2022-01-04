@@ -1,15 +1,34 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.NumerosRomanosConversor" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColor">@color/dark</item>
-        <item name="android:textColorHint">@color/med_light</item>
+        <item name="android:textColorHint">@color/med_dark</item>
         <item name="android:colorBackground">@color/extra_light</item>
+        <item name="android:tint">@color/light</item>
+    </style>
+    <style name="Theme.NumerosRomanosConversorNight" parent="Theme.NumerosRomanosConversor">
+        <item name="android:textColor">@color/light</item>
+        <item name="android:textColorHint">@color/med_light</item>
+        <item name="android:colorBackground">@color/dark</item>
         <item name="android:tint">@color/med_dark</item>
     </style>
-    <style name="Theme.NumerosRomanosConversorNight" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:textColor">@color/light</item>
-        <item name="android:textColorHint">@color/med_dark</item>
-        <item name="android:colorBackground">@color/dark</item>
-        <item name="android:tint">@color/med_light</item>
+    <style name="Theme.NumerosRomanosConversorRojo" parent="Theme.NumerosRomanosConversor">
+        <item name="android:textColor">@color/rojo_text</item>
+        <item name="android:textColorHint">@color/rojo_hint</item>
+        <item name="android:colorBackground">@color/rojo_back</item>
+        <item name="android:tint">@color/rojo_tint</item>
     </style>
+    <style name="Theme.NumerosRomanosConversorOcre" parent="Theme.NumerosRomanosConversor">
+        <item name="android:textColor">@color/ocre_text</item>
+        <item name="android:textColorHint">@color/ocre_hint</item>
+        <item name="android:colorBackground">@color/ocre_back</item>
+        <item name="android:tint">@color/ocre_tint</item>
+    </style>
+    <style name="Theme.NumerosRomanosConversorVerde" parent="Theme.NumerosRomanosConversor">
+        <item name="android:textColor">@color/verde_text</item>
+        <item name="android:textColorHint">@color/verde_hint</item>
+        <item name="android:colorBackground">@color/verde_back</item>
+        <item name="android:tint">@color/verde_tint</item>
+    </style>
+
 </resources>

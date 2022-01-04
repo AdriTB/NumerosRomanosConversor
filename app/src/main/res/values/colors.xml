@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#263238</color>
+    <color name="ic_launcher_background">#32681D</color>
+
     <color name="dark">#263238</color>
     <color name="med_dark">#455A64</color>
     <color name="med_light">#607D8B</color>
     <color name="light">#90A4AE</color>
     <color name="extra_light">#CFD8DC</color>
+
+    <!--OCRE-->
+    <color name="ocre_tint">#827717</color>
+    <color name="ocre_back">#c0ca33</color>
+    <color name="ocre_hint">#d4e157</color>
+    <color name="ocre_text">#e6ee9c</color>
+    <!--VERDE-->
+    <color name="verde_tint">#33691e</color>
+    <color name="verde_back">#689f38</color>
+    <color name="verde_hint">#aed581</color>
+    <color name="verde_text">#dcedc8</color>
+    <!--ROJO-->
+    <color name="rojo_tint">#b71c1c</color>
+    <color name="rojo_back">#e53935</color>
+    <color name="rojo_hint">#e57373</color>
+    <color name="rojo_text">#ffcdd2</color>
+
 
 </resources>

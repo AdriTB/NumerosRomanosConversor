@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">Conversor Números Romanos</string>
+    <string name="app_name">Roman Numbers Converter</string>
+    <string name="romanos">Roman</string>
+    <string name="arabigos">Arabic</string>
+    <string name="pide_romanos">Enter a roman number</string>
+    <string name="pide_naturales">Enter a natural number</string>
+    <string name="no_valido">Isn\'t a valid number</string>
+    <string name="no_negativo">Not negative number</string>
+    <string name="no_superior_5000">Less than 5000</string>
+    <string name="copiado">Copied to clipboard</string>
+    <string name="descripcion_gladius">Select type of conversion</string>
+    <string name="descripcion_tema">Change app theme</string>
+    <string name="descripcion_ayuda">Help</string>
+    <string name="titulo_ayuda">Ayuda</string>
+    <string name="mensaje_ayuda">
+        ¡Welcome!
+        \n\nClick on sword (gladius) to change conversion.
+        \n\nWhen convert to roman numbers enter the number between 0 and 4999.
+        \n\nYou can change theme colors clicking palette.
+        \n\nThaks and hope the app be useful to you ;)</string>
 </resources>

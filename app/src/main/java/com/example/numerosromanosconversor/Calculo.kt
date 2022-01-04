@@ -1,12 +1,9 @@
 package com.example.numerosromanosconversor
 
 import android.util.Log
-import java.util.*
 
-class Calculo() {
+class Calculo {
     companion object {
-        val TAG = "calculo"
-
         val numerosRomanos: Map<Char, Int> = mapOf(
             'i' to 1,
             'v' to 5,
@@ -17,37 +14,36 @@ class Calculo() {
             'm' to 1000
         )
 
-
         fun convertirDecARom(numDec: Int): String {
             if (numDec == 0) return "N"
 
-            if (numDec > 4999) return "Escribe un número inferior a 5000"
+            if (numDec > 4999) return "error_5000"
 
-            if (numDec < 0) return "No puede ser negativo"
+            if (numDec < 0) return "error_negativo"
 
-            var numero_romano = ""
-            var resto = 0
+            val numeroRomano: String
+            var resto: Int
             val millares: Int = numDec / 1000
             resto = numDec - (millares * 1000)
             val centenas: Int = resto / 100
-            resto = resto - (centenas * 100)
+            resto -= (centenas * 100)
             val decenas: Int = resto / 10
-            resto = resto - (decenas * 10)
+            resto -= (decenas * 10)
             val unidades: Int = resto
 
             //Millares
             val millaresRom: String = 'M'.toString().repeat(millares)
-            var unidadesRom: String = ""
+            val unidadesRom: String
 
             //Centenas
-            var centenasRom = ""
+            val centenasRom: String
             if (centenas == 9) centenasRom = "CM"
             else if (centenas == 4) centenasRom = "CD"
             else centenasRom =
                 'D'.toString().repeat(centenas / 5) + 'C'.toString().repeat(centenas % 5)
 
             //Decenas
-            var decenasRom = ""
+            val decenasRom: String
             if (decenas == 9) decenasRom = "XC"
             else if (decenas == 4) decenasRom = "XL"
             else decenasRom =
@@ -59,29 +55,28 @@ class Calculo() {
             else unidadesRom =
                 'V'.toString().repeat(unidades / 5) + 'I'.toString().repeat(unidades % 5)
 
-            numero_romano = millaresRom + centenasRom + decenasRom + unidadesRom
-            return numero_romano
+            numeroRomano = millaresRom + centenasRom + decenasRom + unidadesRom
+            return numeroRomano
         }
 
         fun convertirRomDec(numeroR: String): Int? {
-            val numeroR = numeroR.lowercase()
-            var numeroD = 0
+            val numRomano = numeroR.lowercase()
 
             //El número es cero
-            if (numeroR.equals("n")) return 0
+            if (numRomano == "n") return 0
 
             //Alguna letra no existe en romanos
-            for (letra in numeroR) {
+            for (letra in numRomano) {
                 numerosRomanos.get(letra) ?: return null
             }
 
             //Calculo númerico
-            var resultado: Int = 0
-            for (i in 0..numeroR.length - 1) {
+            var resultado = 0
+            for (i in 0..numRomano.length - 1) {
                 var vSiguiente = 0
-                var vActual = 0
-                vActual = numerosRomanos[numeroR[i]]!!
-                if (i < numeroR.length - 1) vSiguiente = numerosRomanos[numeroR[i + 1]]!!
+                var vActual: Int
+                vActual = numerosRomanos[numRomano[i]]!!
+                if (i < numRomano.length - 1) vSiguiente = numerosRomanos[numRomano[i + 1]]!!
                 //Suma
                 if (vSiguiente > vActual) {
                     resultado -= vActual
@@ -93,22 +88,16 @@ class Calculo() {
             val checkResultado = convertirDecARom(resultado)
             //Si da el mismo resultado esta correcto
             Log.d(
-                TAG,
+                "calculo",
                 "El resultado obtenido es $resultado y en números romanos debería ser $checkResultado"
             )
-            if (checkResultado.lowercase().equals(numeroR)) {
-                return resultado
+            return if (checkResultado.lowercase().equals(numRomano)) {
+                resultado
             } else {
-                return null
+                null
             }
-
-
         }
-
-
     }
-
-
 }
 
 
