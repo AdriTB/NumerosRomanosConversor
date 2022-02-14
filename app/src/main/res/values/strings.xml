@@ -12,11 +12,11 @@
     <string name="descripcion_gladius">Select type of conversion</string>
     <string name="descripcion_tema">Change app theme</string>
     <string name="descripcion_ayuda">Help</string>
-    <string name="titulo_ayuda">Ayuda</string>
+    <string name="titulo_ayuda">Help</string>
     <string name="mensaje_ayuda">
         ¡Welcome!
         \n\nClick on sword (gladius) to change conversion.
         \n\nWhen convert to roman numbers enter the number between 0 and 4999.
         \n\nYou can change theme colors clicking palette.
-        \n\nThaks and hope the app be useful to you ;)</string>
+        \n\nThanks and hope the app be useful to you ;)</string>
 </resources>
