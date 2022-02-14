@@ -1,4 +1,4 @@
-package com.example.numerosromanosconversor
+package com.example.numerosromanosconversor.view
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -6,16 +6,17 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.core.widget.addTextChangedListener
+import com.example.numerosromanosconversor.R
 import com.example.numerosromanosconversor.databinding.ActivityMainBinding
+import com.example.numerosromanosconversor.model.Calculo
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
-    private var resultadoValido: Boolean = false
+    private lateinit var calculo: Calculo
     private var aRomanos = true
 
     companion object{
@@ -32,7 +33,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDefaultNightMode(MODE_NIGHT_NO)
 
-        val prefs = this.getSharedPreferences("com.example.NumerosRomanosConversor", Context.MODE_PRIVATE)
+        val prefs = this.getSharedPreferences(
+            "com.example.NumerosRomanosConversor",
+            Context.MODE_PRIVATE
+        )
         val temaConfigurado = prefs.getInt(KEY_TEMA, 0)
 
         setTheme(temaConfigurado)
@@ -41,31 +45,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        convertirARomanos()
+        calculo = Calculo()
+
+        selConvARomanos()
 
         //Listeners
         binding.btSeleccionar.setOnClickListener{
             it.scaleX *= -1
             if(it.scaleX > 0) {
                 //Decimales a Romanos
-                convertirARomanos()
+                selConvARomanos()
             }else if(it.scaleX < 0){
                 //Romanos a Decimales
-                convertirADecimales()
+                selConvAArabigos()
             }
         }
 
         binding.etNumero.addTextChangedListener {
-            //Log.d("Pruebas", "Texto cambiado a ${binding.etNumero.text}")
             var resultado: String?
-            resultadoValido = false
             if (aRomanos) { // De arabigos a romanos
                 val numero: Int? = binding.etNumero.text.toString().toIntOrNull()
                 if(numero != null){
                     //Obtener
-                    resultado = Calculo.convertirDecARom(numero)
-                    //Comprobar
-                    resultado = comprobarNumeroNatural(resultado)
+                    resultado = calculo.arabigosToRomanos(numero)
                     //Mostrar
                     binding.tvResultado.text = resultado
                 }else{
@@ -76,9 +78,7 @@ class MainActivity : AppCompatActivity() {
                 val numeroR: String = binding.etNumero.text.toString()
                 if(numeroR.isNotEmpty()) {
                     //Obtener
-                    resultado = Calculo.convertirRomDec(numeroR)?.toString()
-                    //Comprobar
-                    resultado = comprobarNumeroRomano(resultado)
+                    resultado = calculo.romanosToArabigos(numeroR).toString()
                     //Mostrar
                     binding.tvResultado.text = resultado
                 }else{
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvResultado.setOnClickListener {
-            if (binding.tvResultado.text.isNotEmpty() && resultadoValido){
+            if (binding.tvResultado.text.isNotEmpty() && calculo.resultadoValido){
                 val clipboard:ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                 val data = ClipData.newPlainText("resultado", binding.tvResultado.text)
                 clipboard.setPrimaryClip(data)
@@ -115,45 +115,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun convertirARomanos(){
+    private fun selConvARomanos(){
         binding.etNumero.setText("")
         aRomanos = true
         binding.etNumero.inputType = InputType.TYPE_CLASS_NUMBER
         binding.etNumero.setHint(R.string.pide_naturales)
     }
-    private fun convertirADecimales(){
+    private fun selConvAArabigos(){
         binding.etNumero.setText("")
         aRomanos = false
         binding.etNumero.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
         binding.etNumero.setHint(R.string.pide_romanos)
     }
 
-    private fun comprobarNumeroNatural(resultado: String) :String{
-        return when (resultado) {
-            "error_5000" -> {
-                Log.d("errores", "MAYOR DE 5000")
-                getString(R.string.no_superior_5000)
-            }
-            "error_negativo" -> {
-                Log.d("errores", "NEGATIVO")
-                getString(R.string.no_negativo)
-            }
-            else -> {
-                resultadoValido = true
-                resultado
-            }
-        }
-    }
 
-    private fun comprobarNumeroRomano(resultado: String?) :String{
-        return if (resultado == null) {
-            Log.d("errores", "NO VALIDO")
-            getString(R.string.no_valido)
-        } else {
-            resultadoValido = true
-            resultado
-        }
-    }
+
+
 
 
 

@@ -7,6 +7,7 @@
     <string name="no_valido">Isn\'t a valid number</string>
     <string name="no_negativo">Not negative number</string>
     <string name="no_superior_5000">Less than 5000</string>
+    <string name="letra_erronea">One or more letters are invalid</string>
     <string name="copiado">Copied to clipboard</string>
     <string name="descripcion_gladius">Select type of conversion</string>
     <string name="descripcion_tema">Change app theme</string>
